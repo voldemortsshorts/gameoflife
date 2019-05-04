@@ -3,7 +3,7 @@ import java.lang.*;
 
 public class Spiel {
 
-private ArrayList<ArrayList<Zelle>> belegung;
+private ArrayList<ArrayList<Zelle>> feld;
 private int groesse;
 private int anfBel;
 private boolean zyklisch;
@@ -11,7 +11,7 @@ private boolean zyklisch;
 
 
 public Spiel (int groesse, int anfBel, boolean zyklisch) {
-  belegung = new ArrayList<ArrayList<Zelle>>();
+  feld = new ArrayList<ArrayList<Zelle>>();
 
   this.groesse = groesse;
   this.anfBel = anfBel;
@@ -22,9 +22,9 @@ public Spiel (int groesse, int anfBel, boolean zyklisch) {
 public void belegen() {//FIXME;
 for (int i = 0; i < groesse; i++){
   ArrayList<Zelle> zellenliste = new ArrayList<Zelle>();
-  belegung.add(zellenliste);
+  feld.add(zellenliste);
    for (int j = 0; j < groesse; j++) {
-     zellenliste.add(new Zelle(i,j,1));
+     zellenliste.add(new Zelle(i,j,false));
 
 
 
@@ -35,6 +35,17 @@ for (int i = 0; i < groesse; i++){
     System.out.println(zelle);
   }
 }*/
+
+public void setup() {
+  for (int i = 0; i < startCells; i++){ //startCells kommt von oben
+    int x = r(0, groesse); //random muss noch implementiert werden
+    int y = r(0, groesse);
+
+    setBelegung(x, y, true);
+  }
+}
+
+//Muster?
 
 System.out.println("Startbelegung:");
 for (int i = 0; i < groesse; i++){
@@ -49,19 +60,19 @@ for (int i = 0; i < groesse; i++){
 //Ende belegen
 
 public int getBelegung(int x, int y){
-  return belegung.get(x).get(y).getBelegt();
+  return feld.get(x).get(y).getBelegt();
 }
 
 public int getBelegungNeu(int x, int y){
-  return belegung.get(x).get(y).getBelegtNeu();
+  return feld.get(x).get(y).getBelegtNeu();
 }
 
-public void setBelegung(int x, int y, int belegt){
-  belegung.get(x).get(y).setBelegt(belegt);
+public void setBelegung(int x, int y, boolean belegt){
+  feld.get(x).get(y).setBelegt(belegt);
 }
 
-public void setBelegungNeu(int x, int y, int belegt){
-  belegung.get(x).get(y).setBelegtNeu(belegt);
+public void setBelegungNeu(int x, int y, boolean belegt){
+  feld.get(x).get(y).setBelegtNeu(belegt);
 }
 
 
@@ -74,7 +85,7 @@ while (weiterspielen){
   for (int i = 0; i < groesse; i++){
     for (int j = 0; j < groesse; j++) {
       int count = 0;
-if (zyklisch){
+if (zyklisch){ //logische Ausdrücke kürzen!!!!
       if (getBelegung((i+(groesse-1))%groesse, (j+(groesse-1))%groesse) == 1){count += 1;}
         if (getBelegung(i, (j+(groesse-1))%groesse) == 1){count += 1;}
           if (getBelegung((i+1)%groesse, (j+(groesse-1))%groesse) == 1){count += 1;}
@@ -84,7 +95,7 @@ if (zyklisch){
                   if (getBelegung(i, (j+1)%groesse) == 1){count += 1;}
                     if (getBelegung((i+1)%groesse, (j+1)%groesse) == 1){count += 1;}}
 
-else if (!zyklisch){
+else if (!zyklisch){//logische Ausdrücke kürzen
   if (j>0){
   if (i>0) {if (getBelegung(i-1, j-1) == 1){count += 1;}}
     if (getBelegung(i, j-1) == 1){count += 1;}
@@ -101,16 +112,16 @@ else if (!zyklisch){
 
 
 
-    if (getBelegung(i,j) == 1){
+    if (getBelegung(i,j)){
       if (count<2 || count >3) {
-        setBelegungNeu(i,j,0);
+        setBelegungNeu(i,j,false);
 
     System.out.println("Feld " + i + "," + j + " auf 0 gesetzt bei count " + count);}
       else {
         setBelegungNeu(i, j, getBelegung(i,j));
         System.out.println("Feld " + i + "," + j + " unverändert bei count " + count);
       } } else if  (count >2) {
-      setBelegungNeu(i,j,1);
+      setBelegungNeu(i,j,true);
       System.out.println("Feld " + i + "," + j + " auf 1 gesetzt bei count " + count);
     } else {
       setBelegungNeu(i, j, getBelegung(i,j));
@@ -126,8 +137,11 @@ System.out.println("Neuer Stand Runde " + runde);
 for (int i = 0; i < groesse; i++){
   for (int j = 0; j < groesse; j++) {
 setBelegung(i, j, getBelegungNeu(i,j));
+
+//Spielende weil alle tot??
+
 //System.out.println(i + "," + j + ": " + getBelegung(i,j));
-if (getBelegung(i,j) == 1) {System.out.print("X ");} else {System.out.print("- ");}
+if (getBelegung(i,j)) {System.out.print("X ");} else {System.out.print("- ");}
 } System.out.println("");
 }
 
