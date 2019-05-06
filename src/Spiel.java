@@ -6,15 +6,17 @@ public class Spiel {
     private ArrayList<ArrayList<Zelle>> feld;
     private int groesse;
     private int startCells;
+    private boolean gleiter;
     private boolean zyklisch;
 
 
-    public Spiel(int groesse, int startCells, boolean zyklisch) {
+    public Spiel(int groesse, int startCells, boolean zyklisch, boolean gleiter) {
         feld = new ArrayList<ArrayList<Zelle>>();
 
         this.groesse = groesse;
         this.startCells = startCells;
         this.zyklisch = zyklisch;
+        this.gleiter = gleiter;
     }
 
 
@@ -32,15 +34,25 @@ public class Spiel {
 
     // Anfangsbelegung erstellen
     public void setup() {
-        for (int i = 0; i < startCells; i++) { //startCells kommt von oben
-            int x = (int) (Math.random() * groesse); //random muss noch implementiert werden
-            int y = (int) (Math.random() * groesse);
+        if (!gleiter) {
 
-            if (!getBelegung(x, y)) {
-                setBelegung(x, y, true);
-            } else if (getBelegung(x, y)) {
-                i--;
+            for (int i = 0; i < startCells; i++) { //startCells kommt von oben
+                int x = (int) (Math.random() * groesse); //random muss noch implementiert werden
+                int y = (int) (Math.random() * groesse);
+
+                if (!getBelegung(x, y)) {
+                    setBelegung(x, y, true);
+                } else if (getBelegung(x, y)) {
+                    i--;
+                }
             }
+        } else if (gleiter) {
+            setBelegung(1, 2, true);
+            setBelegung(2, 3, true);
+            setBelegung(3, 1, true);
+            setBelegung(3, 2, true);
+            setBelegung(3, 3, true);
+
         }
 
         // Bestimmte Muster einstellen?!
