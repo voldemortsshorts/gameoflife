@@ -113,28 +113,28 @@ public class Spiel {
 
                     if (zyklisch) { //logische Ausdrücke kürzen!!!!
 
-                        if (getBelegung((i + (groesse - 1)) % groesse, (j + (groesse - 1)) % groesse) == true) {
+                        if (getBelegung((i + (groesse - 1)) % groesse, (j + (groesse - 1)) % groesse) == true) { // oben links
                             count += 1;
                         }
-                        if (getBelegung(i, (j + (groesse - 1)) % groesse) == true) {
+                        if (getBelegung(i, (j + (groesse - 1)) % groesse) == true) { // mitte links
                             count += 1;
                         }
-                        if (getBelegung((i + 1) % groesse, (j + (groesse - 1)) % groesse) == true) {
+                        if (getBelegung((i + 1) % groesse, (j + (groesse - 1)) % groesse) == true) { // unten links
                             count += 1;
                         }
-                        if (getBelegung((i + (groesse - 1)) % groesse, j) == true) {
+                        if (getBelegung((i + (groesse - 1)) % groesse, j) == true) { // mitte oben
                             count += 1;
                         }
-                        if (getBelegung((i + 1) % groesse, j) == true) {
+                        if (getBelegung((i + 1) % groesse, j) == true) { // mitte unten
                             count += 1;
                         }
-                        if (getBelegung((i + (groesse - 1)) % groesse, (j + 1) % groesse) == true) {
+                        if (getBelegung((i + (groesse - 1)) % groesse, (j + 1) % groesse) == true) { // oben rechts
                             count += 1;
                         }
-                        if (getBelegung(i, (j + 1) % groesse) == true) {
+                        if (getBelegung(i, (j + 1) % groesse) == true) { // mitte rechts
                             count += 1;
                         }
-                        if (getBelegung((i + 1) % groesse, (j + 1) % groesse) == true) {
+                        if (getBelegung((i + 1) % groesse, (j + 1) % groesse) == true) { // unten rechts
                             count += 1;
                         }
 
@@ -186,6 +186,11 @@ public class Spiel {
 
                     // Spielzug ist am Ende
 
+
+                    if (count == 3 && !getBelegung(i, j)
+                    ) {
+
+                    }
 
                     if (getBelegung(i, j)) {
                         if (count < 2 || count > 3) {
