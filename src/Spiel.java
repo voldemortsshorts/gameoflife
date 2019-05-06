@@ -205,9 +205,8 @@ public class Spiel {
                 for (int j = 0; j < groesse; j++) {
                     setBelegung(i, j, getBelegungNeu(i, j));
 
-//Spielende weil alle tot??
 
-//System.out.println(i + "," + j + ": " + getBelegung(i,j));
+
                     if (getBelegung(i, j)) {
                         System.out.print("X ");
                     } else {
@@ -217,6 +216,18 @@ public class Spiel {
                 System.out.println("");
             }
 
+            //Spielende weil alle tot??
+            int k = 0;
+            for (int i = 0; i < groesse; i++) {
+                for (int j = 0; j < groesse; j++) {
+                if(getBelegung(i, j))
+                    k++;
+                }
+            }
+            if (k == 0) {
+                System.out.println("Alle Zellen sind tot. Das Spiel ist zu Ende.");
+                break;
+            }
 //Abfrage
             Scanner scanner = new Scanner(System.in);
             System.out.println("Weiterspielen? Drücken Sie 'j' ");
