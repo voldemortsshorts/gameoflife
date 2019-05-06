@@ -1,5 +1,4 @@
 public class Zelle {
-
     private int x;
     private int y;
     private boolean belegt;
@@ -10,7 +9,6 @@ public class Zelle {
         this.y = y;
         this.belegt = belegt;
     }
-
 
     public boolean getBelegt() {
         return belegt;
