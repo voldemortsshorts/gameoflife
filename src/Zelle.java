@@ -32,9 +32,10 @@ public class Zelle {
     private boolean belegtNeu;
 
     /**
-     * Konstruktor fuer eine Zelle
-     * @param x setzt die x-Koordinate der Zelle im Spielfeld.
-     * @param y setzt die y-Koordinate der Zelle im Spielfeld.
+     * Konstruktor fuer eine Zelle.
+     *
+     * @param x      setzt die x-Koordinate der Zelle im Spielfeld.
+     * @param y      setzt die y-Koordinate der Zelle im Spielfeld.
      * @param belegt setzt die aktuelle Belegung der Zelle.
      */
     public Zelle(int x, int y, boolean belegt) {
