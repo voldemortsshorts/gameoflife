@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Fuehrt John Conway's Game of Life aus, indem es eine Nutzerabfrage für die notwendigen Parameter durchfuehrt.
+ */
+
 public class Main {
 
     public static void main(String[] args) {
@@ -7,12 +11,13 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int groesse, anfBel, startCells, intZyk;
-        boolean zyklisch = false; // Muss anscheinend mit einem Wert initialisiert werden. Dieser Wert wird aber auf jeden Fall ueberschrieben.
+        boolean zyklisch = false; // Muss anscheinend mit einem Wert initialisiert werden. Dieser Wert wird aber auf jeden Fall ueberschrieben
 
 
         System.out.print("Geben Sie bitte zun\u00E4chst die Gr\u00F6\u00DFe des Spielfelds ein.\n"
                 + "Akzeptiert werden auch hier ausschlie\u00DFlich Integer von 1 bis einschlie\u00DFlich 100: ");
 
+        // Abfrage nach Groesse des Spiefelds zw. 1 und 100.
         do {
             // Nutzereingabe: Pruefung, ob Eingabe vom Typ int ist
             while (!sc.hasNextInt()) {
@@ -27,6 +32,7 @@ public class Main {
                 String input = Integer.toString(groesse);
                 System.out.printf("\"%s\" ist nicht gr\u00F6\u00DFer als 0. Bitte korrigieren Sie Ihre Eingabe: ", input);
 
+            // Nutzereingabe: Pruefung, ob Eingabe kleiner als 100 ist
             } else if (groesse > 100) {
                 String input = Integer.toString(groesse);
                 System.out.printf("\"%s\" ist gr\u00F6\u00DFer als 100. Bitte korrigieren Sie Ihre Eingabe: ", input);
@@ -46,11 +52,12 @@ public class Main {
 
             anfBel = sc.nextInt();
 
-            // Nutzereingabe: Pruefung, ob Eingabe groesser als 0 oder groesser als 100 ist
+            // Nutzereingabe: Pruefung, ob Eingabe groesser als 0 ist
             if (anfBel < 1) {
                 String input = Integer.toString(anfBel);
                 System.out.printf("\"%s\" ist nicht gr\u00F6\u00DFer als 0. Bitte korrigieren Sie Ihre Eingabe: ", input);
 
+            // Nutzereingabe: Pruefung, ob Eingabe kleiner als 100 ist
             } else if (anfBel > 100) {
                 String input = Integer.toString(anfBel);
                 System.out.printf("\"%s\" ist gr\u00F6\u00DFer als 100. Bitte korrigieren Sie Ihre Eingabe: ", input);
@@ -58,6 +65,7 @@ public class Main {
 
         } while (anfBel < 1 || anfBel > 100);
 
+        // Menge an startCells wird in Abhaengigkeit von Groesse des Spielfelds und Anfangsbelegung berechnet
         startCells = (anfBel * (groesse * groesse)) / 100;
 
 
@@ -78,9 +86,10 @@ public class Main {
                 String input = Integer.toString(intZyk);
                 System.out.printf("\"%s\" ist kleiner als 0. Bitte korrigieren Sie Ihre Eingabe: ", input);
 
+            // Nutzereingabe: Pruefung, ob Eingabe groesser als 1 ist
             } else if (intZyk > 1) {
                 String input = Integer.toString(intZyk);
-                System.out.printf("\"%s\" ist gr\u00F6sser als 1. Bitte korrigieren Sie Ihre Eingabe: ", input);
+                System.out.printf("\"%s\" ist gr\u00F6\u00DFer als 1. Bitte korrigieren Sie Ihre Eingabe: ", input);
 
             } else if (intZyk == 1) {
                 zyklisch = true;
